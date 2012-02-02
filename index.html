@@ -39,6 +39,7 @@
     $(function() {
         $('#bulletedList').ellipsis();
         $('#orderedList').ellipsis({visible: 2, more: 'more'});
+        $('#definitionList').ellipsis();
         // TODO: numbered list, description list, p/div/span
         // TODO: cb (anim)
     });
@@ -88,6 +89,26 @@
         <li>Leopard</li>
         <li>Panther</li>
         <li>Lynx</li>
+    </ol>
+
+    <h3>Definition List</h3>
+
+    <ol id="definitionList">
+        <dt>Lion</dt>
+        <dd>Royal</dd>
+        <dt>Tiger</dt>
+        <dd>Striped</dd>
+        <dt>Cat</dt>
+        <dd>Furry</dd>
+        <dd>Cute</dd>
+        <dt>Jaguar</dt>
+        <dt>Leopard</dt>
+        <dd>Strong</dd>
+        <dd>Powerful</dd>
+        <dt>Panther</dt>
+        <dd>Agile</dd>
+        <dt>Lynx</dt>
+        <dd>Sneaky</dd>
     </ol>
 
     <h2>Dependencies</h2>
