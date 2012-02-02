@@ -16,7 +16,12 @@
             var $slice = $elem.children().slice($($elems[options.visible]).index()).hide();
 
             $more(name, options.more, function() {
-                $slice.show();
+                if(options.showCb) {
+                    options.showCb($slice);
+                }
+                else {
+                    $slice.show();
+                }
             }).appendTo($elem);
 
             return true;
@@ -32,7 +37,12 @@
             $elem.text(text);
 
             $more('span', options.more, function() {
-                $elem.text(origText);
+                if(options.showCb) {
+                    options.showCb($elem, origText);
+                }
+                else {
+                    $elem.text(origText);
+                }
             }).appendTo($elem);
 
             return true;
@@ -55,7 +65,8 @@
             var $elem = $(this);
             var opts = $.extend({
                 visible: 3,
-                more: '...'
+                more: '...',
+                showCb: null
             }, options);
 
             ellipsis($elem, opts);

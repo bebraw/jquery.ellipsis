@@ -39,9 +39,13 @@
     $(function() {
         $('#bulletedList').ellipsis();
         $('#orderedList').ellipsis({visible: 2, more: 'more'});
-        $('#definitionList').ellipsis();
+        $('#definitionList').ellipsis({showCb: function($e) {
+            $e.fadeIn(500);
+        }});
         $('#paragraph').ellipsis({visible: 10});
-        // TODO: cb (anim)
+        $('#animatedParagraph').ellipsis({visible: 10, showCb: function($e, t) {
+            $e.hide().text(t).slideDown('slow');
+        }});
     });
   </script>
 </head>
@@ -91,7 +95,7 @@
         <li>Lynx</li>
     </ol>
 
-    <h3>Definition List</h3>
+    <h3>Animated Definition List</h3>
 
     <ol id="definitionList">
         <dt>Lion</dt>
@@ -114,6 +118,10 @@
     <h3>Paragraph</h3>
 
     <p id="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+    <h3>Animated Paragraph</h3>
+
+    <p id="animatedParagraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 
     <h2>Dependencies</h2>
 
