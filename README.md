@@ -1,4 +1,4 @@
-# yabox.js - Yet another lightbox clone for jQuery
+# ellipsis.js - Ellipsis plugin for jQuery
 
-yabox.js provides a simple way to set up a lightboxish popover. It's very light by design. You're supposed to extend it to fit your purposes.
+ellipsis.js makes it possible to hide content using ellipsis (...) or some other markup. After that is clicked, it will show rest of the content.
 
