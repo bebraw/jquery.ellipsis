@@ -1,8 +1,12 @@
 /* MIT (c) Juho Vepsalainen */
 (function ($) {
     function ellipsis($elem, options) {
-        check('li', $elem, options);
-        check('dt', $elem, options);
+        var a = check('li', $elem, options);
+        var b = check('dt', $elem, options);
+
+        if(!(a || b)) {
+            checkText($elem, options);
+        }
     }
 
     function check(name, $elem, options) {
@@ -10,13 +14,40 @@
 
         if($elems.length > options.visible) {
             var $slice = $elem.children().slice($($elems[options.visible]).index()).hide();
-            var $more = $('<' + name + ' class="more">' + options.more +'</' + name + '>').appendTo($elem);
 
-            $more.bind('click', function() {
+            $more(name, options.more, function() {
                 $slice.show();
-                $more.remove();
-            });
+            }).appendTo($elem);
+
+            return true;
         }
+    }
+
+    function checkText($elem, options) {
+        var origText = $elem.text();
+        var split = origText.split(' ');
+
+        if(split.length > options.visible) {
+            var text = split.slice(0, options.visible).join(' ');
+            $elem.text(text);
+
+            $more('span', options.more, function() {
+                $elem.text(origText);
+            }).appendTo($elem);
+
+            return true;
+        }
+    }
+
+    function $more(name, text, showCb) {
+        var $m = $('<' + name + ' class="more">' + text +'</' + name + '>');
+
+        $m.bind('click', function() {
+            showCb();
+            $m.remove();
+        });
+
+        return $m;
     }
 
     $.fn.ellipsis = function(options) {
