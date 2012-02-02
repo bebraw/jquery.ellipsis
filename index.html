@@ -5,6 +5,8 @@
 
   <title>bebraw/ellipsis.js @ GitHub</title>
 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="js/jquery.ellipsis.js" type="text/javascript"></script>
   <style type="text/css">
     body {
       margin-top: 1.0em;
@@ -27,7 +29,21 @@
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+
+    /* demo CSS */
+    .more {
+        cursor: pointer;
+    }
   </style>
+  <script type="text/javascript">
+    $(function() {
+        $('#bulletedList').ellipsis();
+
+        // TODO: numbered list, description list, p/div/span
+        // TODO: cb (anim)
+        // TODO: custom visible + more
+    });
+  </script>
 </head>
 
 <body>
@@ -36,9 +52,9 @@
   <div id="container">
 
     <div class="download">
-      <a href="https://github.com/bebraw/ellipsis.js/zipball/master">
+      <a href="https://github.com/bebraw/ellipsis.js/zipball/gh-pages">
         <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-      <a href="https://github.com/bebraw/ellipsis.js/tarball/master">
+      <a href="https://github.com/bebraw/ellipsis.js/tarball/gh-pages">
         <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
     </div>
 
@@ -49,26 +65,41 @@
       Ellipsis plugin for jQuery (MIT)
     </div>
 
-    
+    <h2>Demo</h2> 
 
+    <h3>Bulleted List</h3>
     
+    <ul id="bulletedList">
+        <li>Lion</li>
+        <li>Tiger</li>
+        <li>Cat</li>
+        <li>Jaguar</li>
+        <li>Leopard</li>
+        <li>Panther</li>
+        <li>Lynx</li>
+    </ul>
 
-    
+    <h2>Dependencies</h2>
 
-    
+    <p>jQuery (1.something)</p>
 
+    <h2>Installation</h2>
     
+    <p>Copy jquery.ellipsis.js to some appropriate place, link to it at your HTML, use $.ellipsis($elem, opts);. Check out opts and markup at source.</p>
 
+    <h2>License</h2>
+
+    <p>MIT</p>
     
-      <h2>Contact</h2>
-      <p>Juho Vepsäläinen (bebraw@gmail.com)<br/>      </p>
+    <h2>Contact</h2>
     
+    <p>Juho Vepsäläinen (bebraw youknowwhat gmail dot com)</p>
 
     <h2>Download</h2>
     <p>
       You can download this project in either
-      <a href="https://github.com/bebraw/ellipsis.js/zipball/master">zip</a> or
-      <a href="https://github.com/bebraw/ellipsis.js/tarball/master">tar formats.
+      <a href="https://github.com/bebraw/ellipsis.js/zipball/gh-pages">zip</a> or
+      <a href="https://github.com/bebraw/ellipsis.js/tarball/gh-pages">tar formats.
     </p>
     <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
       by running:
