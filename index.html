@@ -38,10 +38,9 @@
   <script type="text/javascript">
     $(function() {
         $('#bulletedList').ellipsis();
-
+        $('#orderedList').ellipsis({visible: 2, more: 'more'});
         // TODO: numbered list, description list, p/div/span
         // TODO: cb (anim)
-        // TODO: custom visible + more
     });
   </script>
 </head>
@@ -78,6 +77,18 @@
         <li>Panther</li>
         <li>Lynx</li>
     </ul>
+
+    <h3>Ordered List</h3>
+    
+    <ol id="orderedList">
+        <li>Lion</li>
+        <li>Tiger</li>
+        <li>Cat</li>
+        <li>Jaguar</li>
+        <li>Leopard</li>
+        <li>Panther</li>
+        <li>Lynx</li>
+    </ol>
 
     <h2>Dependencies</h2>
 
