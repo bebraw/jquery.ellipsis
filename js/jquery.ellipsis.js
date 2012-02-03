@@ -23,7 +23,9 @@
                     $slice.show();
                 }
             }).appendTo($elem);
+        }
 
+        if($elems.length) {
             return true;
         }
     }
