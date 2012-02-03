@@ -62,16 +62,18 @@
         return $m;
     }
 
+    var defaults = {
+        visible: 3,
+        more: '...',
+        showCb: null
+    };
     $.fn.ellipsis = function(options) {
         return this.each(function () {
             var $elem = $(this);
-            var opts = $.extend({
-                visible: 3,
-                more: '...',
-                showCb: null
-            }, options);
+            var opts = $.extend({}, defaults, options);
 
             ellipsis($elem, opts);
         });
     };
+    $.fn.ellipsis.options = defaults;
 })(jQuery);

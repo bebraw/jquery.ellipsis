@@ -7,6 +7,7 @@
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script src="js/jquery.ellipsis.js" type="text/javascript"></script>
+  <script src="js/jquery.qdemo.js" type="text/javascript"></script>
   <style type="text/css">
     body {
       margin-top: 1.0em;
@@ -37,6 +38,7 @@
   </style>
   <script type="text/javascript">
     $(function() {
+        $('#interactive').qdemo('Ellipsis', 'ellipsis', '<p>foo bar foo bar foo</p>');
         $('#bulletedList').ellipsis();
         $('#orderedList').ellipsis({visible: 2, more: 'more'});
         $('#definitionList').ellipsis({showCb: function($e) {
@@ -69,7 +71,11 @@
       Ellipsis plugin for jQuery (MIT)
     </div>
 
-    <h2>Demo</h2> 
+    <h2>Demo</h2>
+
+    <h3>Interactive</h3>
+
+    <div id="interactive"></div>
 
     <h3>Bulleted List</h3>
     
