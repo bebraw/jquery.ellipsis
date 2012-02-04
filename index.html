@@ -22,7 +22,10 @@
   </style>
   <script type="text/javascript">
     $(function() {
-        $('#interactive').qdemo('Ellipsis', 'ellipsis', '<p>foo bar foo bar foo</p>');
+        $('#interactive').qdemo({
+            pluginName: 'ellipsis',
+            parentElement: '<p>foo bar foo bar foo</p>'
+        });
         $('#bulletedList').ellipsis();
         $('#orderedList').ellipsis({visible: 2, more: 'more'});
         $('#definitionList').ellipsis({showCb: function($e) {

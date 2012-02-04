@@ -1,6 +1,11 @@
 /* MIT (c) Juho Vepsalainen */
 (function($) {
-    $.fn.qdemo = function(title, pluginName, parentElement, inputCb) {
+    $.fn.qdemo = function(opts) {
+        var title = opts.title || '';
+        var pluginName = opts.pluginName || '';
+        var parentElement = opts.parentElement || '<div></div>';
+        var inputCb = opts.inputCb || function(parent) {};
+        
         // http://javascript.crockford.com/remedial.html
         function typeOf(value) {
             var s = typeof value;
@@ -46,6 +51,12 @@
         }
 
         function constructUI(options) {
+            function textArea(name, id, value) {
+                return '<label for="' + id + '">' + name + ': </label>' +
+                    '<textarea id="' + id + '" name="' + name + '">' +
+                    value + '</textarea>';
+            }
+
             function textInput(name, id, value) {
                 return input(name, id, value, 'text');
             }
@@ -127,8 +138,7 @@
             }
 
             var $ret = _recursion(options, 'pluginOptions');
-            $ret.prepend(textInput(format('parentElement'), 'parentElement',
-                parentElement || '<div></div>'));
+            $ret.prepend(textArea(format('parentElement'), 'parentElement', parentElement));
 
             return $ret;
         }
@@ -214,7 +224,7 @@
         }
 
         function constructCode(options) {
-            var ret = '$(parent).colorPicker(';
+            var ret = '$(parent).' + pluginName + '(';
 
             function stringify(a) {
                 if(typeOf(a) == 'string') {
@@ -284,7 +294,7 @@
             '</form>' +
             '<form>' +
             '<fieldset><legend>Code</legend>' +
-            '<div id="code"></div>' +
+            '<pre id="code"></pre>' +
             '</fieldset>' +
             '</form>' +
             '<form>' +
@@ -325,7 +335,7 @@
             }
         });
 
-        $("input").live('change', function() {
+        $("input, #parentElement").live('change', function() {
             var pluginOptions = getPluginOptions();
             var code = constructCode(pluginOptions);
 
@@ -337,9 +347,7 @@
             $('#pluginContainer').append($parentElement);
             $('#plugin')[pluginName](pluginOptions);
 
-            if (typeOf(inputCb) == 'function') {
-                inputCb(parent);
-            }
+            inputCb(parent);
         }).change();
     };
 })(jQuery);
