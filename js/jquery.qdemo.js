@@ -288,20 +288,15 @@
             return ret;
         }
 
+        // TODO: might want to add a cb for this
         $(this[0]).append('<form>' +
             '<fieldset><legend>' + title + '</legend>' +
             '<div id="options"></div></fieldset>' +
             '</form>' +
-            '<form>' +
-            '<fieldset><legend>Code</legend>' +
+            '<h3>Code</h3>' +
             '<pre id="code"></pre>' +
-            '</fieldset>' +
-            '</form>' +
-            '<form>' +
-            '<fieldset><legend>Plugin</legend>' +
-            '<div id="pluginContainer"></div>' +
-            '</fieldset>' +
-            '</form>'
+            '<h3>Plugin</h3>' +
+            '<div id="pluginContainer"></div>'
         );
 
         var options = $.fn[pluginName].options;
