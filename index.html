@@ -35,7 +35,7 @@
         $('#animatedParagraph').ellipsis({visible: 10, showCb: function($e, t) {
             $e.hide().text(t).slideDown('slow');
         }});
-        $('#url').ellipsis({atFront: true, separator: '', visible: 10});
+        $('#chars').ellipsis({atFront: true, separator: '', visible: 10});
     });
   </script>
 </head>
@@ -136,9 +136,9 @@
     </div>
 
     <div class="span3">
-        <h3>Url</h3>
+        <h3>Characters</h3>
 
-        <a id="url" href="#">http://www.somerandomsite.com</a>
+        <p id="chars">http://www.somerandomsite.com</p>
     </div>
 
     <div class="span6">
