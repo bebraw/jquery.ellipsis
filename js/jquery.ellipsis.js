@@ -31,11 +31,12 @@
     }
 
     function checkText($elem, options) {
+        var sep = options.separator;
         var origText = $elem.text();
-        var split = origText.split(' ');
+        var split = origText.split(sep);
 
         if(split.length > options.visible) {
-            var text = split.slice(0, options.visible).join(' ');
+            var text = split.slice(0, options.visible).join(sep);
             $elem.text(text);
 
             var $m = $more('span', options.more, function() {
@@ -68,6 +69,7 @@
     var defaults = {
         visible: 3,
         more: '&hellip;',
+        separator: ' ',
         showCb: null,
         atFront: false
     };

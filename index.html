@@ -35,6 +35,7 @@
         $('#animatedParagraph').ellipsis({visible: 10, showCb: function($e, t) {
             $e.hide().text(t).slideDown('slow');
         }});
+        $('#url').ellipsis({atFront: true, separator: '', visible: 10});
     });
   </script>
 </head>
@@ -84,7 +85,7 @@
         <div id="interactive"></div>
     </div>
 
-    <div class="span4">
+    <div class="span3">
         <h3>Bulleted List</h3>
     
         <ul id="bulletedList">
@@ -98,7 +99,7 @@
         </ul>
     </div>
 
-    <div class="span4">
+    <div class="span3">
         <h3>Ordered List</h3>
     
         <ol id="orderedList">
@@ -112,7 +113,7 @@
         </ol>
     </div>
 
-    <div class="span4">
+    <div class="span3">
         <h3>Animated Definition List</h3>
 
         <ol id="definitionList">
@@ -132,6 +133,12 @@
             <dt>Lynx</dt>
             <dd>Sneaky</dd>
         </ol>
+    </div>
+
+    <div class="span3">
+        <h3>Url</h3>
+
+        <a id="url" href="#">http://www.somerandomsite.com</a>
     </div>
 
     <div class="span6">
