@@ -38,14 +38,17 @@
             var text = split.slice(0, options.visible).join(' ');
             $elem.text(text);
 
-            $more('span', options.more, function() {
+            var $m = $more('span', options.more, function() {
                 if(options.showCb) {
                     options.showCb($elem, origText);
                 }
                 else {
                     $elem.text(origText);
                 }
-            }).appendTo($elem);
+            });
+
+            if(options.atFront) $m.prependTo($elem);
+            else $m.appendTo($elem);
 
             return true;
         }
@@ -65,7 +68,8 @@
     var defaults = {
         visible: 3,
         more: '&hellip;',
-        showCb: null
+        showCb: null,
+        atFront: false
     };
     $.fn.ellipsis = function(options) {
         return this.each(function () {
