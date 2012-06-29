@@ -64,7 +64,7 @@
 
     var defaults = {
         visible: 3,
-        more: '...',
+        more: '&hellip;',
         showCb: null
     };
     $.fn.ellipsis = function(options) {
