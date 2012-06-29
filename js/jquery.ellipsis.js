@@ -36,8 +36,12 @@
         var split = origText.split(sep);
 
         if(split.length > options.visible) {
-            var text = split.slice(0, options.visible).join(sep);
-            $elem.text(text);
+            var text;
+
+            if(options.atFront) text = split.slice(-options.visible);
+            else text = split.slice(0, options.visible);
+
+            $elem.text(text.join(sep));
 
             var $m = $more('span', options.more, function() {
                 if(options.showCb) {
