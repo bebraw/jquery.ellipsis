@@ -1,0 +1,20 @@
+.more {
+    cursor: pointer;
+}
+
+fieldset {
+    margin: 0;
+    border: none;
+}
+
+fieldset legend {
+    font-weight: bold;
+}
+
+label {
+    display: block;
+}
+
+input, textarea, select {
+    display: inline-block;
+}
