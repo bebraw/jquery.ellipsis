@@ -1,4 +1,3 @@
-/* MIT (c) Juho Vepsalainen */
 (function ($) {
     function ellipsis($elem, options) {
         var a = check('li', $elem, options);
