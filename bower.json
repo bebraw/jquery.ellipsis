@@ -1,0 +1,27 @@
+{
+  "name": "jquery.ellipsis",
+  "version": "0.6.1",
+  "homepage": "https://github.com/bebraw/jquery.ellipsis",
+  "authors": [
+    "Juho Vepsalainen <bebraw@gmail.com>"
+  ],
+  "description": "Hide content using ellipsis (...) or some other markup.",
+  "main": "dist/jquery.ellipsis.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jquery",
+    "ellipsis",
+    "ui"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+    "images",
+    "_site",
+    "js"
+  ]
+}
