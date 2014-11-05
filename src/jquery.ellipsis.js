@@ -14,7 +14,7 @@
         if($elems.length > options.visible) {
             var $slice = $elem.children().slice($($elems[options.visible]).index()).hide();
 
-            $more(name, options.more, function() {
+            $more(name, options, function() {
                 if(options.showCb) {
                     options.showCb($slice);
                 }
@@ -42,7 +42,7 @@
 
             $elem.text(text.join(sep));
 
-            var $m = $more('span', options.more, function() {
+            var $m = $more('span', options, function() {
                 if(options.showCb) {
                     options.showCb($elem, origText);
                 }
@@ -58,8 +58,11 @@
         }
     }
 
-    function $more(name, text, showCb) {
-        var $m = $('<' + name + ' class="more">' + text +'</' + name + '>');
+    function $more(name, options, showCb) {
+        var text = options.more;
+        var moreClass = options.moreClass;
+
+        var $m = $('<' + name + ' class="' + moreClass + '">' + text +'</' + name + '>');
 
         $m.bind('click', function() {
             showCb();
@@ -72,6 +75,7 @@
     var defaults = {
         visible: 3,
         more: '&hellip;',
+        moreClass: 'more',
         separator: ' ',
         showCb: null,
         atFront: false

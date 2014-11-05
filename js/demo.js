@@ -3,7 +3,9 @@ $(function() {
         pluginName: 'ellipsis',
         parentElement: '<p>john eliza mike roger</p>'
     });
-    $('#bulletedList').ellipsis();
+    $('#bulletedList').ellipsis({
+        moreClass: 'another-more'
+    });
     $('#orderedList').ellipsis({visible: 2, more: 'more'});
     $('#definitionList').ellipsis({showCb: function($e) {
         $e.fadeIn(500);

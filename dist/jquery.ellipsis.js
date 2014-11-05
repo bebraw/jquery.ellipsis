@@ -1,5 +1,5 @@
 /*! jquery.ellipsis - v0.6.1 - Juho Vepsalainen - MIT
-https://github.com/bebraw/jquery.ellipsis - 2013-09-10 */
+https://github.com/bebraw/jquery.ellipsis - 2014-11-05 */
 (function ($) {
     function ellipsis($elem, options) {
         var a = check('li', $elem, options);
@@ -16,7 +16,7 @@ https://github.com/bebraw/jquery.ellipsis - 2013-09-10 */
         if($elems.length > options.visible) {
             var $slice = $elem.children().slice($($elems[options.visible]).index()).hide();
 
-            $more(name, options.more, function() {
+            $more(name, options, function() {
                 if(options.showCb) {
                     options.showCb($slice);
                 }
@@ -44,7 +44,7 @@ https://github.com/bebraw/jquery.ellipsis - 2013-09-10 */
 
             $elem.text(text.join(sep));
 
-            var $m = $more('span', options.more, function() {
+            var $m = $more('span', options, function() {
                 if(options.showCb) {
                     options.showCb($elem, origText);
                 }
@@ -60,8 +60,11 @@ https://github.com/bebraw/jquery.ellipsis - 2013-09-10 */
         }
     }
 
-    function $more(name, text, showCb) {
-        var $m = $('<' + name + ' class="more">' + text +'</' + name + '>');
+    function $more(name, options, showCb) {
+        var text = options.more;
+        var moreClass = options.moreClass;
+
+        var $m = $('<' + name + ' class="' + moreClass + '">' + text +'</' + name + '>');
 
         $m.bind('click', function() {
             showCb();
@@ -74,6 +77,7 @@ https://github.com/bebraw/jquery.ellipsis - 2013-09-10 */
     var defaults = {
         visible: 3,
         more: '&hellip;',
+        moreClass: 'more',
         separator: ' ',
         showCb: null,
         atFront: false
