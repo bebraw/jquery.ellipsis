@@ -1,5 +1,5 @@
-/*! jquery.ellipsis - v0.6.2 - Juho Vepsalainen - MIT
-https://github.com/bebraw/jquery.ellipsis - 2014-11-05 */
+/*! jquery.ellipsis - v0.6.4 - Juho Vepsalainen - MIT
+https://github.com/bebraw/jquery.ellipsis - 2014-11-10 */
 (function ($) {
     function ellipsis($elem, options) {
         var a = check('li', $elem, options);
