@@ -1,4 +1,4 @@
-/*! jquery.ellipsis - v0.6.4 - Juho Vepsalainen - MIT
+/*! jquery.ellipsis - v0.7.0 - Juho Vepsalainen - MIT
 https://github.com/bebraw/jquery.ellipsis - 2015-03-10 */
 (function($) {
     function ellipsis($elem, options) {
