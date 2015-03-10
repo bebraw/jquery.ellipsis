@@ -1,11 +1,11 @@
 /*! jquery.ellipsis - v0.6.4 - Juho Vepsalainen - MIT
-https://github.com/bebraw/jquery.ellipsis - 2014-11-10 */
-(function ($) {
+https://github.com/bebraw/jquery.ellipsis - 2015-03-10 */
+(function($) {
     function ellipsis($elem, options) {
         var a = check('li', $elem, options);
         var b = check('dt', $elem, options);
 
-        if(!(a || b)) {
+        if (!(a || b)) {
             checkText($elem, options);
         }
     }
@@ -13,50 +13,49 @@ https://github.com/bebraw/jquery.ellipsis - 2014-11-10 */
     function check(name, $elem, options) {
         var $elems = $(name, $elem);
 
-        if($elems.length > options.visible) {
+        if ($elems.length > options.visible) {
             var $slice = $elem.children().slice($($elems[options.visible]).index()).hide();
 
             $more(name, options, function() {
-                if(options.showCb) {
+                if (options.showCb) {
                     options.showCb($slice);
-                }
-                else {
+                } else {
                     $slice.show();
                 }
             }).appendTo($elem);
         }
 
-        if($elems.length) {
+        if ($elems.length) {
             return true;
         }
     }
 
     function checkText($elem, options) {
-        var sep = options.separator;
-        var origText = $elem.text();
-        var split = origText.split(sep);
+        var input = $elem.html();
+        var result = process({
+            input: input,
+            visible: options.visible,
+            separator: options.separator,
+            atFront: options.atFront
+        });
 
-        if(split.length > options.visible) {
-            var text;
-
-            if(options.atFront) text = split.slice(-options.visible);
-            else text = split.slice(0, options.visible);
-
-            $elem.text(text.join(sep));
+        if(input !== result) {
+            $elem.html(result);
 
             var $m = $more('span', options, function() {
-                if(options.showCb) {
-                    options.showCb($elem, origText);
-                }
-                else {
-                    $elem.text(origText);
+                if (options.showCb) {
+                    options.showCb($elem, input);
+                } else {
+                    $elem.html(input);
                 }
             });
 
-            if(options.atFront) $m.prependTo($elem);
-            else $m.appendTo($elem);
-
-            return true;
+            if (options.atFront) {
+                $m.prependTo($elem);
+            }
+            else {
+                $m.appendTo($elem);
+            }
         }
     }
 
@@ -64,7 +63,7 @@ https://github.com/bebraw/jquery.ellipsis - 2014-11-10 */
         var text = options.more;
         var moreClass = options.moreClass;
 
-        var $m = $('<' + name + ' class="' + moreClass + '">' + text +'</' + name + '>');
+        var $m = $('<' + name + ' class="' + moreClass + '">' + text + '</' + name + '>');
 
         $m.bind('click', function() {
             showCb();
@@ -72,6 +71,160 @@ https://github.com/bebraw/jquery.ellipsis - 2014-11-10 */
         });
 
         return $m;
+    }
+
+    function process(o) {
+        o.segments = segmentize(o.input);
+
+        return toHTML(ellipsify(o));
+    }
+
+    function segmentize(str) {
+        var segments = [];
+        var node = '';
+        var text = '';
+        var inTag = false;
+
+        str.split('').forEach(function(char) {
+            if (char === '<') {
+                inTag = true;
+
+                if (text) {
+                    segments.push({
+                        text: text,
+                        node: ''
+                    });
+
+                    text = '';
+                }
+            }
+            else if (char === '>') {
+                inTag = false;
+
+                if (node) {
+                    segments.push({
+                        text: '',
+                        node: node
+                    });
+
+                    node = '';
+                }
+            }
+            else if (inTag) {
+                node += char;
+            }
+            else {
+                text += char;
+            }
+        });
+
+        if (text) {
+            segments.push({
+                text: text,
+                node: ''
+            });
+        }
+
+        return segments;
+    }
+
+    function ellipsify(o) {
+        var segments = o.segments;
+        var visible = o.visible;
+        var separator = o.separator;
+        var atFront = o.atFront;
+        var str = segments.map(function(segment) {
+            return segment.text;
+        }).join('');
+        var split = str.split(separator);
+
+        if (split.length > visible) {
+            if (atFront) {
+                return mergeFromEnd(
+                    segments,
+                    split.slice(-visible).join(separator)
+                );
+            }
+
+            return mergeFromStart(
+                segments,
+                split.slice(0, visible).join(separator)
+            );
+        }
+
+        return segments;
+    }
+
+    function mergeFromEnd(segments, text) {
+        var emptyText = false;
+        var accum = 0;
+
+        console.log(text);
+        // XXX: mutates original array when reversing
+        return segments.reverse().map(function(segment) {
+            if (emptyText) {
+                segment.text = '';
+
+                return segment;
+            }
+
+            var t = segment.text;
+            var len = t.length;
+            var fragment = text.slice(text.length - len - accum, text.length - accum);
+
+            if (t === fragment) {
+                accum += len;
+            }
+
+            if (fragment.length < len) {
+                segment.text = fragment;
+                emptyText = true;
+            }
+
+            return segment;
+        }).reverse();
+    }
+
+    function mergeFromStart(segments, text) {
+        var emptyText = false;
+        var accum = 0;
+
+        return segments.map(function(segment) {
+            if (emptyText) {
+                segment.text = '';
+
+                return segment;
+            }
+
+            var t = segment.text;
+            var len = t.length;
+            var fragment = text.slice(accum, accum + len);
+
+            if (t === fragment) {
+                accum += len;
+            }
+            else if (fragment.length < len) {
+                segment.text = fragment;
+                emptyText = true;
+            }
+
+            return segment;
+        });
+    }
+
+    function toHTML(segments) {
+        var ret = '';
+
+        segments.forEach(function(segment) {
+            if (segment.node) {
+                ret += '<' + segment.node + '>';
+            }
+            if (segment.text) {
+                ret += segment.text;
+            }
+        });
+
+        return ret;
     }
 
     var defaults = {
@@ -83,7 +236,7 @@ https://github.com/bebraw/jquery.ellipsis - 2014-11-10 */
         atFront: false
     };
     $.fn.ellipsis = function(options) {
-        return this.each(function () {
+        return this.each(function() {
             var $elem = $(this);
             var opts = $.extend({}, defaults, options);
 

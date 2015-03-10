@@ -1,7 +1,7 @@
 $(function() {
     $('#interactive').qdemo({
         pluginName: 'ellipsis',
-        parentElement: '<p>john eliza mike roger</p>'
+        parentElement: '<p>john <b>eliza mike</b><br/> roger</p>'
     });
     $('#bulletedList').ellipsis({
         moreClass: 'another-more'
