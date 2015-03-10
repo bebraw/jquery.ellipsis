@@ -159,13 +159,10 @@ https://github.com/bebraw/jquery.ellipsis - 2015-03-10 */
         var emptyText = false;
         var accum = 0;
 
-        console.log(text);
         // XXX: mutates original array when reversing
         return segments.reverse().map(function(segment) {
             if (emptyText) {
-                segment.text = '';
-
-                return segment;
+                return;
             }
 
             var t = segment.text;
@@ -182,7 +179,7 @@ https://github.com/bebraw/jquery.ellipsis - 2015-03-10 */
             }
 
             return segment;
-        }).reverse();
+        }).filter(id).reverse();
     }
 
     function mergeFromStart(segments, text) {
@@ -191,9 +188,7 @@ https://github.com/bebraw/jquery.ellipsis - 2015-03-10 */
 
         return segments.map(function(segment) {
             if (emptyText) {
-                segment.text = '';
-
-                return segment;
+                return;
             }
 
             var t = segment.text;
@@ -209,8 +204,10 @@ https://github.com/bebraw/jquery.ellipsis - 2015-03-10 */
             }
 
             return segment;
-        });
+        }).filter(id);
     }
+
+    function id(a) {return a;}
 
     function toHTML(segments) {
         var ret = '';

@@ -157,13 +157,10 @@
         var emptyText = false;
         var accum = 0;
 
-        console.log(text);
         // XXX: mutates original array when reversing
         return segments.reverse().map(function(segment) {
             if (emptyText) {
-                segment.text = '';
-
-                return segment;
+                return;
             }
 
             var t = segment.text;
@@ -180,7 +177,7 @@
             }
 
             return segment;
-        }).reverse();
+        }).filter(id).reverse();
     }
 
     function mergeFromStart(segments, text) {
@@ -189,9 +186,7 @@
 
         return segments.map(function(segment) {
             if (emptyText) {
-                segment.text = '';
-
-                return segment;
+                return;
             }
 
             var t = segment.text;
@@ -207,8 +202,10 @@
             }
 
             return segment;
-        });
+        }).filter(id);
     }
+
+    function id(a) {return a;}
 
     function toHTML(segments) {
         var ret = '';
